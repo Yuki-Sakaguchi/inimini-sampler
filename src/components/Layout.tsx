@@ -6,11 +6,12 @@ type Title = {
   children: ReactNode;
 };
 
-export const Layout: FC<Title> = ({ children, title = 'inimini' }) => {
+export const Layout: FC<Title> = ({ children, title = 'イニミニ' }) => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center font-mono text-gray-800">
       <Head>
         <title>{title}</title>
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
       <main className="flex w-screen flex-1 flex-col items-center justify-center">
         {children}
