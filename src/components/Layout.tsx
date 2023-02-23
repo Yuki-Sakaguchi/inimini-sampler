@@ -14,7 +14,7 @@ export const Layout: FC<Title> = ({ children, title = 'イニミニ' }) => {
         <title>{title}</title>
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
-      <main className="flex w-screen flex-1 flex-col items-center justify-center">
+      <main className="relative flex w-screen flex-1 flex-col items-center justify-center">
         {children}
       </main>
       <footer className="flex h-12 w-full items-center justify-center border-t">
