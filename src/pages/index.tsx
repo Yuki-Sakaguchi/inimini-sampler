@@ -14,7 +14,7 @@ const SamplerButton: FC<{
 }> = ({ children, onClick, color }) => {
   return (
     <button
-      className="flex aspect-square h-full items-center justify-center bg-blue-400 text-sm text-white"
+      className="flex aspect-square h-full items-center justify-center bg-blue-400 text-sm text-white active:scale-95"
       style={{ backgroundColor: color }}
       onClick={onClick}
     >
