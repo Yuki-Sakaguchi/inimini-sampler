@@ -1,3 +1,4 @@
+import type { FC, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import useSound from 'use-sound';
 import { useState } from 'react';
@@ -5,6 +6,20 @@ import { useState } from 'react';
 import Image from 'next/image';
 import * as Slider from '@radix-ui/react-slider';
 import { Layout } from '@/components/Layout';
+
+const SamplerButton: FC<{ children: ReactNode; onClick: () => void }> = ({
+  children,
+  onClick,
+}) => {
+  return (
+    <button
+      className="flex aspect-square h-full items-center justify-center bg-blue-400 text-sm text-white"
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
 
 /**
  * サンプラーページ
@@ -15,9 +30,21 @@ const Sampler: NextPage = () => {
 
   return (
     <Layout>
-      <button onClick={() => play()} className="active:scale-95">
-        <Image src="/images/seiya.png" alt="" width="106" height="134" />
-      </button>
+      <div className="mb-6">
+        <button onClick={() => play()} className="active:scale-95">
+          <Image src="/images/seiya.png" alt="" width="106" height="134" />
+        </button>
+      </div>
+      <div className="grid w-full max-w-[500px] grid-cols-3 gap-4 px-6">
+        <SamplerButton onClick={() => play()}>イニミニ</SamplerButton>
+        <SamplerButton onClick={() => play()}>レカピカ</SamplerButton>
+        <SamplerButton onClick={() => play()}>レーライ</SamplerButton>
+        <SamplerButton onClick={() => play()}>オニメカ</SamplerButton>
+        <SamplerButton onClick={() => play()}>チカロリ</SamplerButton>
+        <SamplerButton onClick={() => play()}>
+          パパランパンプッシュ
+        </SamplerButton>
+      </div>
       <div className="absolute bottom-4 flex justify-center">
         <Slider.Root
           className="relative flex h-[20px] w-[200px] touch-none select-none items-center"
