@@ -2,6 +2,13 @@ import type { FC, ReactNode } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
+import { Noto_Sans_JP } from '@next/font/google';
+
+const notoSans = Noto_Sans_JP({
+  weight: '900',
+  preload: false,
+});
+
 type Title = {
   title?: string;
   children: ReactNode;
@@ -14,7 +21,9 @@ export const Layout: FC<Title> = ({ children, title = 'イニミニ' }) => {
         <title>{title}</title>
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
-      <main className="relative flex w-screen flex-1 flex-col items-center justify-center">
+      <main
+        className={`${notoSans.className} relative flex w-screen flex-1 flex-col items-center justify-center`}
+      >
         {children}
       </main>
       <footer className="flex h-12 w-full items-center justify-center border-t">
