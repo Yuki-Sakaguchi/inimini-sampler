@@ -7,13 +7,15 @@ import Image from 'next/image';
 import * as Slider from '@radix-ui/react-slider';
 import { Layout } from '@/components/Layout';
 
-const SamplerButton: FC<{ children: ReactNode; onClick: () => void }> = ({
-  children,
-  onClick,
-}) => {
+const SamplerButton: FC<{
+  children: ReactNode;
+  onClick: () => void;
+  color: string;
+}> = ({ children, onClick, color }) => {
   return (
     <button
       className="flex aspect-square h-full items-center justify-center bg-blue-400 text-sm text-white"
+      style={{ backgroundColor: color }}
       onClick={onClick}
     >
       {children}
@@ -26,23 +28,70 @@ const SamplerButton: FC<{ children: ReactNode; onClick: () => void }> = ({
  */
 const Sampler: NextPage = () => {
   const [volume, setVolume] = useState(0.5);
-  const [play] = useSound('/sound/inimini.mp3', { interrupt: true, volume });
+  const [playFull] = useSound('/sound/inimini-full.mp3', {
+    interrupt: true,
+    volume,
+  });
+  const [playInimini] = useSound('/sound/inimini.mp3', {
+    interrupt: true,
+    volume,
+  });
+  const [playRekapika] = useSound('/sound/rekapika.mp3', {
+    interrupt: true,
+    volume,
+  });
+  const [playReirai] = useSound('/sound/reirai.mp3', {
+    interrupt: true,
+    volume,
+  });
+  const [playOnimeka] = useSound('/sound/onimeka.mp3', {
+    interrupt: true,
+    volume,
+  });
+  const [playChikarori] = useSound('/sound/chikarori.mp3', {
+    interrupt: true,
+    volume,
+  });
+  const [playPaparanpanpush] = useSound('/sound/paparanpanpush.mp3', {
+    interrupt: true,
+    volume,
+  });
 
   return (
     <Layout>
-      <div className="mb-6">
-        <button onClick={() => play()} className="active:scale-95">
+      <div className="mb-10 flex flex-col items-center justify-center">
+        <h1 className="text-center text-lg">
+          <Image
+            src="/images/title.png"
+            alt="イニミニ"
+            width={229 / 2}
+            height={75 / 2}
+          />
+        </h1>
+        <button onClick={() => playFull()} className="active:scale-95">
           <Image src="/images/seiya.png" alt="" width="106" height="134" />
         </button>
       </div>
       <div className="grid w-full max-w-[500px] grid-cols-3 gap-4 px-6">
-        <SamplerButton onClick={() => play()}>イニミニ</SamplerButton>
-        <SamplerButton onClick={() => play()}>レカピカ</SamplerButton>
-        <SamplerButton onClick={() => play()}>レーライ</SamplerButton>
-        <SamplerButton onClick={() => play()}>オニメカ</SamplerButton>
-        <SamplerButton onClick={() => play()}>チカロリ</SamplerButton>
-        <SamplerButton onClick={() => play()}>
-          パパランパンプッシュ
+        <SamplerButton onClick={() => playInimini()} color="#0362c6">
+          イニミニ
+        </SamplerButton>
+        <SamplerButton onClick={() => playRekapika()} color="#ed3428">
+          レカピカ
+        </SamplerButton>
+        <SamplerButton onClick={() => playReirai()} color="#139b31">
+          レーライ
+        </SamplerButton>
+        <SamplerButton onClick={() => playOnimeka()} color="#f8b50f">
+          オニメカ
+        </SamplerButton>
+        <SamplerButton onClick={() => playChikarori()} color="#fe50b3">
+          チカロリ
+        </SamplerButton>
+        <SamplerButton onClick={() => playPaparanpanpush()} color="#ff7401">
+          パパランパン
+          <br />
+          プッシュ
         </SamplerButton>
       </div>
       <div className="absolute bottom-4 flex justify-center">
