@@ -10,7 +10,7 @@ import { Layout } from '@/components/Layout';
 const SamplerButton: FC<{
   children: ReactNode;
   onClick: () => void;
-  color: string;
+  color?: string;
 }> = ({ children, onClick, color }) => {
   return (
     <button
@@ -56,10 +56,22 @@ const Sampler: NextPage = () => {
     interrupt: true,
     volume,
   });
+  const [playSeiya] = useSound('/sound/seiya.mp3', {
+    interrupt: true,
+    volume,
+  });
+  const [playNannanjasorya] = useSound('/sound/nannanjasorya.mp3', {
+    interrupt: true,
+    volume,
+  });
+  const [playChingell] = useSound('/sound/chinbell.mp3', {
+    interrupt: true,
+    volume,
+  });
 
   return (
     <Layout>
-      <div className="mb-10 flex flex-col items-center justify-center">
+      <div className="mb-5 flex flex-col items-center justify-center">
         <h1 className="text-center text-lg">
           <Image
             src="/images/title.png"
@@ -72,7 +84,7 @@ const Sampler: NextPage = () => {
           <Image src="/images/seiya.png" alt="" width="106" height="134" />
         </button>
       </div>
-      <div className="grid w-full max-w-[500px] grid-cols-3 gap-4 px-6">
+      <div className="grid w-full max-w-[500px] grid-cols-3 gap-4 px-6 pb-6">
         <SamplerButton onClick={() => playInimini()} color="#0362c6">
           イニミニ
         </SamplerButton>
@@ -88,11 +100,20 @@ const Sampler: NextPage = () => {
         <SamplerButton onClick={() => playChikarori()} color="#fe50b3">
           チカロリ
         </SamplerButton>
-        <SamplerButton onClick={() => playPaparanpanpush()} color="#ff7401">
+        <SamplerButton onClick={() => playPaparanpanpush()} color="#2bcbab">
           パパランパン
           <br />
           プッシュ
         </SamplerButton>
+        <SamplerButton onClick={() => playSeiya()} color="#8228ed">
+          せいや
+        </SamplerButton>
+        <SamplerButton onClick={() => playNannanjasorya()} color="#ff7401">
+          なんなんじゃ
+          <br />
+          そりゃ
+        </SamplerButton>
+        <SamplerButton onClick={() => playChingell()}>チンベル</SamplerButton>
       </div>
       <div className="absolute bottom-4 flex justify-center">
         <Slider.Root
