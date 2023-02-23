@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 
 type Title = {
   title?: string;
@@ -17,7 +18,12 @@ export const Layout: FC<Title> = ({ children, title = 'イニミニ' }) => {
         {children}
       </main>
       <footer className="flex h-12 w-full items-center justify-center border-t">
-        @ inimini
+        <Image
+          src="/images/title.png"
+          alt="イニミニ"
+          width={229 / 3.5}
+          height={75 / 3.5}
+        />
       </footer>
     </div>
   );
