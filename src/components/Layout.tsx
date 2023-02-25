@@ -26,7 +26,7 @@ export const Layout: FC<Title> = ({ children, title = 'イニミニ' }) => {
       >
         {children}
       </main>
-      <footer className="flex h-12 w-full items-center justify-center border-t">
+      <footer className="flex w-full items-center justify-center border-t py-[20px]">
         <Image
           src="/images/title.png"
           alt="イニミニ"
