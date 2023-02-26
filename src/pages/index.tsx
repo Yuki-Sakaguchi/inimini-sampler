@@ -85,8 +85,13 @@ const Dialog: FC = () => {
       <AlertDialog.Portal>
         <AlertDialog.Overlay className="fixed inset-0 bg-black opacity-70" />
         <AlertDialog.Content className="fixed top-1/2 left-1/2 max-h-[85vh] w-4/5 max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-md focus:outline-none">
-          <AlertDialog.Title className="text-center text-lg font-bold text-gray-600">
-            サイトについて
+          <AlertDialog.Title className="mb-2 flex justify-center text-lg font-bold text-gray-600">
+            <Image
+              src="/images/title.png"
+              alt="イニミニ"
+              width={229 / 2}
+              height={75 / 2}
+            />
           </AlertDialog.Title>
           <AlertDialog.Description className="text-center text-gray-600">
             音が出ますのでご注意ください。
@@ -208,7 +213,7 @@ const Sampler: NextPage = () => {
   return (
     <Layout>
       <div className="mb-5 flex flex-col items-center justify-center">
-        <h1 className="text-center text-lg">
+        <h1 className="pt-8 text-center text-lg">
           <Image
             src="/images/title.png"
             alt="イニミニ"
@@ -262,7 +267,7 @@ const Sampler: NextPage = () => {
           ビート3
         </BeatButton>
       </div>
-      <div className="absolute bottom-4 flex items-center justify-center">
+      <div className="flex items-center justify-center pb-10">
         <div className="mr-6 h-[30px] w-[30px] text-yellow-400">
           {volume > 0 ? <SpeakerWaveIcon /> : <SpeakerXMarkIcon />}
         </div>
