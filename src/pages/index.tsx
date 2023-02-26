@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import * as Slider from '@radix-ui/react-slider';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
+import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/solid';
 import { Layout } from '@/components/Layout';
 
 const SamplerButton: FC<{
@@ -172,7 +173,10 @@ const Sampler: NextPage = () => {
         </SamplerButton>
         <SamplerButton onClick={() => playChingell()}>チンベル</SamplerButton>
       </div>
-      <div className="absolute bottom-4 flex justify-center">
+      <div className="absolute bottom-4 flex items-center justify-center">
+        <div className="mr-6 h-[30px] w-[30px] text-yellow-400">
+          {volume > 0 ? <SpeakerWaveIcon /> : <SpeakerXMarkIcon />}
+        </div>
         <Slider.Root
           className="relative flex h-[20px] w-[200px] touch-none select-none items-center"
           defaultValue={[volume]}
