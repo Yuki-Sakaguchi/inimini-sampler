@@ -36,7 +36,7 @@ const BeatButton: FC<{
     <button
       className={clsx(
         'flex w-full items-center justify-center bg-gray-300 py-3 text-sm text-white active:scale-95',
-        active && 'bg-yellow-500'
+        active && 'bg-yellow-400'
       )}
       style={{ backgroundColor: color }}
       onClick={onClick}
@@ -155,19 +155,22 @@ const Sampler: NextPage = () => {
   const [playEdm, { stop: stopEdm }] = useSound('/sound/beat/edm.mp3', {
     interrupt: true,
     volume,
+    loop: true,
   });
   const [playPops, { stop: stopPops }] = useSound(
     '/sound/beat/pops_bpm80.mp3',
     {
       interrupt: true,
       volume,
+      loop: true,
     }
   );
   const [playRock, { stop: stopRock }] = useSound(
-    '/sound/beat/rock_bpm180.mp3',
+    '/sound/beat/rock_bpm160.mp3',
     {
       interrupt: true,
       volume,
+      loop: true,
     }
   );
 
