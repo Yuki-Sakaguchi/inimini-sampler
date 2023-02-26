@@ -1,10 +1,11 @@
 import type { FC, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import useSound from 'use-sound';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Image from 'next/image';
 import * as Slider from '@radix-ui/react-slider';
+import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import { Layout } from '@/components/Layout';
 
 const SamplerButton: FC<{
@@ -20,6 +21,62 @@ const SamplerButton: FC<{
     >
       {children}
     </button>
+  );
+};
+
+const Button: FC<{ children: ReactNode; onClick: () => void }> = ({
+  children,
+  onClick,
+}) => {
+  return (
+    <button
+      className={`rounded-full bg-[#0362c6] px-6 py-2 text-white`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
+
+const Dialog: FC = () => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    console.log('dialog useEffect', open);
+    setOpen(true);
+  }, []);
+
+  if (typeof window === undefined) {
+    return null;
+  }
+
+  if (!open) {
+    console.log('dialog false', open);
+    return null;
+  }
+
+  console.log('dialog true', open);
+
+  return (
+    <AlertDialog.Root defaultOpen={true} open={open} onOpenChange={setOpen}>
+      <AlertDialog.Trigger />
+      <AlertDialog.Portal>
+        <AlertDialog.Overlay className="fixed inset-0 bg-black opacity-70" />
+        <AlertDialog.Content className="fixed top-1/2 left-1/2 max-h-[85vh] w-4/5 max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-md focus:outline-none">
+          <AlertDialog.Title className="text-center text-lg font-bold text-gray-600">
+            サイトについて
+          </AlertDialog.Title>
+          <AlertDialog.Description className="text-center text-gray-600">
+            音が出ますのでご注意ください。
+          </AlertDialog.Description>
+          <div className="mt-6 flex justify-center gap-5">
+            <AlertDialog.Cancel asChild>
+              <Button onClick={() => setOpen(false)}>遊ぶ</Button>
+            </AlertDialog.Cancel>
+          </div>
+        </AlertDialog.Content>
+      </AlertDialog.Portal>
+    </AlertDialog.Root>
   );
 };
 
@@ -130,6 +187,7 @@ const Sampler: NextPage = () => {
           <Slider.Thumb className="block h-[20px] w-[20px] rounded-2xl bg-yellow-300 shadow-md hover:border-green-50 focus:shadow-sm focus:outline-none" />
         </Slider.Root>
       </div>
+      <Dialog />
     </Layout>
   );
 };
