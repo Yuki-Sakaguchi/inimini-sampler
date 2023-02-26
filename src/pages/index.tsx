@@ -2,6 +2,7 @@ import type { FC, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import useSound from 'use-sound';
 import { useState, useEffect } from 'react';
+import clsx from 'clsx';
 
 import Image from 'next/image';
 import * as Slider from '@radix-ui/react-slider';
@@ -11,12 +12,32 @@ import { Layout } from '@/components/Layout';
 
 const SamplerButton: FC<{
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   color?: string;
 }> = ({ children, onClick, color }) => {
   return (
     <button
       className="flex aspect-square w-full items-center justify-center bg-blue-400 text-sm text-white active:scale-95"
+      style={{ backgroundColor: color }}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
+
+const BeatButton: FC<{
+  children: ReactNode;
+  onClick?: () => void;
+  color?: string;
+  active?: boolean;
+}> = ({ children, onClick, color, active }) => {
+  return (
+    <button
+      className={clsx(
+        'flex w-full items-center justify-center bg-gray-300 py-3 text-sm text-white active:scale-95',
+        active && 'bg-yellow-500'
+      )}
       style={{ backgroundColor: color }}
       onClick={onClick}
     >
@@ -86,6 +107,9 @@ const Dialog: FC = () => {
  */
 const Sampler: NextPage = () => {
   const [volume, setVolume] = useState(0.5);
+  const [beat, setBeat] = useState<number | null>(null);
+
+  // サンプラー音源
   const [playFull] = useSound('/sound/inimini-full.mp3', {
     interrupt: true,
     volume,
@@ -126,6 +150,57 @@ const Sampler: NextPage = () => {
     interrupt: true,
     volume,
   });
+
+  // ビート
+  const [playEdm, { stop: stopEdm }] = useSound('/sound/beat/edm.mp3', {
+    interrupt: true,
+    volume,
+  });
+  const [playPops, { stop: stopPops }] = useSound(
+    '/sound/beat/pops_bpm80.mp3',
+    {
+      interrupt: true,
+      volume,
+    }
+  );
+  const [playRock, { stop: stopRock }] = useSound(
+    '/sound/beat/rock_bpm180.mp3',
+    {
+      interrupt: true,
+      volume,
+    }
+  );
+
+  // ビートを切り替える
+  const changeBeat = (id: number) => {
+    stopEdm();
+    stopPops();
+    stopRock();
+
+    // 同じIDがきたら止めて終了
+    if (beat === id) {
+      setBeat(null);
+      return;
+    }
+
+    // 今のビートと違うのであればそれぞれ再生する
+    switch (id) {
+      case 1:
+        playEdm();
+        setBeat(1);
+        break;
+      case 2:
+        playPops();
+        setBeat(2);
+        break;
+      case 3:
+        playRock();
+        setBeat(3);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Layout>
@@ -172,6 +247,17 @@ const Sampler: NextPage = () => {
           そりゃ
         </SamplerButton>
         <SamplerButton onClick={() => playChingell()}>チンベル</SamplerButton>
+      </div>
+      <div className="mt-4 grid w-full max-w-[500px] grid-cols-3 gap-4 px-6 pb-6">
+        <BeatButton onClick={() => changeBeat(1)} active={beat === 1}>
+          ビート1
+        </BeatButton>
+        <BeatButton onClick={() => changeBeat(2)} active={beat === 2}>
+          ビート2
+        </BeatButton>
+        <BeatButton onClick={() => changeBeat(3)} active={beat === 3}>
+          ビート3
+        </BeatButton>
       </div>
       <div className="absolute bottom-4 flex items-center justify-center">
         <div className="mr-6 h-[30px] w-[30px] text-yellow-400">
