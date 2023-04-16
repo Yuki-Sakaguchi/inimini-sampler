@@ -2,7 +2,7 @@
 
 [demo](https://inimini-sampler.vercel.app/)
 
-https://user-images.githubusercontent.com/16290220/232266946-6763a7aa-5569-4e52-a9a3-38a82692b3b1.mov
+https://user-images.githubusercontent.com/16290220/232266998-73db1abb-d178-4c27-85e1-3e95d6f00493.mov
 
 ## TODO
 - [ ] 他の音声を追加
